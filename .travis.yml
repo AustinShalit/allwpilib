@@ -3,11 +3,11 @@ language: java
 
 matrix:
   include:
-  - env: JOB=WPIFORMAT
+  - &linux
+    env: JOB=WPIFORMAT
     script:
       - python3.5 -m wpiformat -y 2018 -clang 5.0
       - git --no-pager diff --exit-code HEAD  # Ensure formatter made no changes
-    &linux
     os: linux
     dist: trusty
     addons:
