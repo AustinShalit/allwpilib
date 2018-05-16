@@ -3,7 +3,12 @@ language: java
 
 matrix:
   include:
-  - os: linux
+  - env: JOB=WPIFORMAT
+    script:
+      - python3.5 -m wpiformat -y 2018 -clang 5.0
+      - git --no-pager diff --exit-code HEAD  # Ensure formatter made no changes
+    &linux
+    os: linux
     dist: trusty
     addons:
       apt:
@@ -26,10 +31,11 @@ matrix:
       - ln -s /usr/bin/g++-6 $HOME/latest-gcc-symlinks/g++
       - ln -s /usr/bin/gcc-6 $HOME/latest-gcc-symlinks/gcc
       - export PATH=$HOME/latest-gcc-symlinks:$PATH
-    script:
-      - python3.5 -m wpiformat -y 2018 -clang 5.0
-      - git --no-pager diff --exit-code HEAD  # Ensure formatter made no changes
-      - ./gradlew --no-daemon --console=plain -PskipAthena :hal:halSharedLibrary :hal:halJNISharedLibrary :wpilibc:wpilibcSharedLibrary :wpilibj:jar
+  - <<: *linux
+    env: JOB=SHAREDLIBS
+    script: ./gradlew --no-daemon --console=plain -PskipAthena :hal:halSharedLibrary :hal:halJNISharedLibrary :wpilibc:wpilibcSharedLibrary :wpilibj:jar
+  - <<: *linux
+    env: JOB=TEST
 
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
