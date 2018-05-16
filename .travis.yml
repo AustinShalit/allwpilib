@@ -35,7 +35,7 @@ matrix:
     env: JOB=SHAREDLIBS
     script: ./gradlew --no-daemon --console=plain -PskipAthena :hal:halSharedLibrary :hal:halJNISharedLibrary :wpilibc:wpilibcSharedLibrary :wpilibj:jar
   - <<: *linux
-    env: JOB=TEST
+    env: JOB=TESTJOB
 
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
