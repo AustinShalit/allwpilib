@@ -1,0 +1,27 @@
+var group__ntcore__table__func =
+[
+    [ "DeleteAllEntries", "group__ntcore__table__func.html#gae112f37376f51ab70894fa37cbb1a210", null ],
+    [ "DeleteAllEntries", "group__ntcore__table__func.html#ga17b4721bbd422853a29db96d63920c0a", null ],
+    [ "DeleteEntry", "group__ntcore__table__func.html#ga03d0a723385257cf6bd2cfb81f896b59", null ],
+    [ "DeleteEntry", "group__ntcore__table__func.html#ga64db9a6cf3674fb7024d6bc12bb2d050", null ],
+    [ "GetEntries", "group__ntcore__table__func.html#gab9ebe35cdef558d31f77f4fe61f62cab", null ],
+    [ "GetEntry", "group__ntcore__table__func.html#ga041354ebe253abfabf4bc4614d5ef1b8", null ],
+    [ "GetEntryFlags", "group__ntcore__table__func.html#ga70a9d991624ff61e0d293d3fbd23fa22", null ],
+    [ "GetEntryFlags", "group__ntcore__table__func.html#gaaf11e666c80bf50b13ddcfa3f07bae5a", null ],
+    [ "GetEntryInfo", "group__ntcore__table__func.html#ga1a21fd80f383c92102bf3654f6cdca4f", null ],
+    [ "GetEntryInfo", "group__ntcore__table__func.html#ga768a474d86b0c397634cf8f997697f9f", null ],
+    [ "GetEntryInfo", "group__ntcore__table__func.html#gab66830f7bdec3c64fc8dc6bd8270e1e1", null ],
+    [ "GetEntryLastChange", "group__ntcore__table__func.html#gaa14a553ed4e2301ceda8b3de7f54a8ea", null ],
+    [ "GetEntryName", "group__ntcore__table__func.html#gaa4e310d5104c2dbcabcbfa0f67a90275", null ],
+    [ "GetEntryType", "group__ntcore__table__func.html#ga16ae14eb3fcf593ca51d05a9fe2e9a81", null ],
+    [ "GetEntryValue", "group__ntcore__table__func.html#ga35cb2e138b34cf2ca81c6afbac4749e1", null ],
+    [ "GetEntryValue", "group__ntcore__table__func.html#ga81ed798081da596187d6333b695d0f37", null ],
+    [ "SetDefaultEntryValue", "group__ntcore__table__func.html#gaead6f0952f744eb3d02f8cd1ec0e4b15", null ],
+    [ "SetDefaultEntryValue", "group__ntcore__table__func.html#ga0f7ef07625248aa0f358991ccdfa191f", null ],
+    [ "SetEntryFlags", "group__ntcore__table__func.html#ga292e4d9eaa943ad91c59d01372d8c1c0", null ],
+    [ "SetEntryFlags", "group__ntcore__table__func.html#ga87e4af40cabdc95834841fc469469678", null ],
+    [ "SetEntryTypeValue", "group__ntcore__table__func.html#gaf7fd00eeffd9adacd592f386c5ade3c6", null ],
+    [ "SetEntryTypeValue", "group__ntcore__table__func.html#ga6cd4eb822d9ca28dc26df0a3e0a7ae7b", null ],
+    [ "SetEntryValue", "group__ntcore__table__func.html#gaf70c11b5c2690feb7e05e7bf5c0787a7", null ],
+    [ "SetEntryValue", "group__ntcore__table__func.html#gaed6252a5480cd315aab0d1efe1ccf056", null ]
+];
