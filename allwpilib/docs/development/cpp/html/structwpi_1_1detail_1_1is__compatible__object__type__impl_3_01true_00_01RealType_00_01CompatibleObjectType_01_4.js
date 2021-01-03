@@ -1,0 +1,4 @@
+var structwpi_1_1detail_1_1is__compatible__object__type__impl_3_01true_00_01RealType_00_01CompatibleObjectType_01_4 =
+[
+    [ "value", "structwpi_1_1detail_1_1is__compatible__object__type__impl_3_01true_00_01RealType_00_01CompatibleObjectType_01_4.html#a785bd9fbdc4c6887bfd0f51010cd512b", null ]
+];

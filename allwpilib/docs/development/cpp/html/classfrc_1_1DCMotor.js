@@ -1,0 +1,26 @@
+var classfrc_1_1DCMotor =
+[
+    [ "newton_meters_per_ampere_t", "classfrc_1_1DCMotor.html#a6f6acfec5a859cc48a49c19b0d7915e7", null ],
+    [ "radians_per_second_per_volt_t", "classfrc_1_1DCMotor.html#ab012648bd8dece29303ae7eda9f4dd73", null ],
+    [ "DCMotor", "classfrc_1_1DCMotor.html#a83661feb0f2caa7b1ada247f81fdf61f", null ],
+    [ "Andymark9015", "classfrc_1_1DCMotor.html#a381ca26b8b9b17bbe6eebd731a368891", null ],
+    [ "Bag", "classfrc_1_1DCMotor.html#a3288f6db8ca0c60762a0525b963a2beb", null ],
+    [ "BanebotsRS550", "classfrc_1_1DCMotor.html#afc26822deb3b6f5c726aff09535f30c6", null ],
+    [ "BanebotsRS775", "classfrc_1_1DCMotor.html#a38c347e4e9b628ebb73b5cd12344ecdd", null ],
+    [ "CIM", "classfrc_1_1DCMotor.html#a83f7eb301ed35f4b106b7dbe813bac34", null ],
+    [ "Current", "classfrc_1_1DCMotor.html#ae39e09029d01d92d7ad33b9b5841ffcd", null ],
+    [ "Falcon500", "classfrc_1_1DCMotor.html#a046a4cf7bb369b17213888268ca5c2e0", null ],
+    [ "MiniCIM", "classfrc_1_1DCMotor.html#af943d05fac7ac8f35965841e7ca66343", null ],
+    [ "NEO", "classfrc_1_1DCMotor.html#a8fae42950c3cbf926807a16e61774c89", null ],
+    [ "NEO550", "classfrc_1_1DCMotor.html#ae3dd6e6e0847f798f6e6c275e912f682", null ],
+    [ "RS775_125", "classfrc_1_1DCMotor.html#a97d0dea4698f8e7a4c0e489804e486a2", null ],
+    [ "Vex775Pro", "classfrc_1_1DCMotor.html#a609933c5b8e79f10ad2ecc99e0d012bd", null ],
+    [ "freeCurrent", "classfrc_1_1DCMotor.html#a5e6bb0c2c5abb5c63f99b1b1ba3e5f86", null ],
+    [ "freeSpeed", "classfrc_1_1DCMotor.html#a225809d83b7821716aa1851f29aaed60", null ],
+    [ "Kt", "classfrc_1_1DCMotor.html#afe07bc766092da58de217b8c260c6d08", null ],
+    [ "Kv", "classfrc_1_1DCMotor.html#ab23a53a3532df6689dedb0786e54eb3c", null ],
+    [ "nominalVoltage", "classfrc_1_1DCMotor.html#ae539ff643424447f5e66c481dd90c80a", null ],
+    [ "R", "classfrc_1_1DCMotor.html#af2dda9f2f390850b97589e43f297218d", null ],
+    [ "stallCurrent", "classfrc_1_1DCMotor.html#a97c66b9be7770b03af07fda00580e996", null ],
+    [ "stallTorque", "classfrc_1_1DCMotor.html#aacfd3514c3a1bfc1355116bd51dc1bc5", null ]
+];
