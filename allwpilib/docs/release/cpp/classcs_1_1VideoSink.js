@@ -1,0 +1,37 @@
+var classcs_1_1VideoSink =
+[
+    [ "Kind", "classcs_1_1VideoSink.html#a2dfd389f1cdd5173d67b7dc235c2aba0", [
+      [ "kUnknown", "classcs_1_1VideoSink.html#a2dfd389f1cdd5173d67b7dc235c2aba0a5d19dd4bf3e13fa32a251cce3b6fdb09", null ],
+      [ "kMjpeg", "classcs_1_1VideoSink.html#a2dfd389f1cdd5173d67b7dc235c2aba0abcfa425d0b0ee0c1ffa5f7bc1fadc914", null ],
+      [ "kCv", "classcs_1_1VideoSink.html#a2dfd389f1cdd5173d67b7dc235c2aba0a11620df819b547b946fdd567140eff73", null ]
+    ] ],
+    [ "VideoSink", "classcs_1_1VideoSink.html#aaf034e402aa7dd2d658e2fb81b1ef4d1", null ],
+    [ "VideoSink", "classcs_1_1VideoSink.html#a3417fb32f5991c9a10ba9a260355ffd7", null ],
+    [ "VideoSink", "classcs_1_1VideoSink.html#a8340d91219b5314f541d3fbe1fd6fbad", null ],
+    [ "~VideoSink", "classcs_1_1VideoSink.html#af66f12a6193e13b432e3fa09ae784a0a", null ],
+    [ "VideoSink", "classcs_1_1VideoSink.html#ae26824710e91ad43e657799141e3b820", null ],
+    [ "EnumerateProperties", "classcs_1_1VideoSink.html#af55ef125ce5d1d2618b877d60fd7b749", null ],
+    [ "EnumerateSinks", "classcs_1_1VideoSink.html#a019a051a8ae071fd1b3aeeaa0a565b87", null ],
+    [ "GetConfigJson", "classcs_1_1VideoSink.html#ac98f110ab84f37db3c3afa2326a2bad9", null ],
+    [ "GetConfigJsonObject", "classcs_1_1VideoSink.html#aeb4de517e0e9487f0ca9566879fbbaff", null ],
+    [ "GetDescription", "classcs_1_1VideoSink.html#a4ba79bf4e0c593d048b5adda4ac7634c", null ],
+    [ "GetHandle", "classcs_1_1VideoSink.html#aa2f473452e3c3e860b983812cf49275c", null ],
+    [ "GetKind", "classcs_1_1VideoSink.html#a67efd9fa71576ea73e19858cd3d1e0cc", null ],
+    [ "GetLastStatus", "classcs_1_1VideoSink.html#ae51f7d62126a436df0d63f81a5d49ad2", null ],
+    [ "GetName", "classcs_1_1VideoSink.html#ae42cb6b172cdd6858d014c8d633ef5db", null ],
+    [ "GetProperty", "classcs_1_1VideoSink.html#a74db71a33f3789bbf639faa666c10501", null ],
+    [ "GetSource", "classcs_1_1VideoSink.html#aa890216909c3a7c92446af98ff9abb31", null ],
+    [ "GetSourceProperty", "classcs_1_1VideoSink.html#a123e18b3ae17428510a318c8566ea493", null ],
+    [ "operator bool", "classcs_1_1VideoSink.html#af13d27d4792bad1f623ecaf68a9331dc", null ],
+    [ "operator!=", "classcs_1_1VideoSink.html#a449abbf2afcbc76fa1f1f5021f2537db", null ],
+    [ "operator=", "classcs_1_1VideoSink.html#aa6c5e370fc420b2ef92effe1359089cc", null ],
+    [ "operator==", "classcs_1_1VideoSink.html#acbc4778cc7a123ed785fe29d6c46700d", null ],
+    [ "SetConfigJson", "classcs_1_1VideoSink.html#a705c5043fdc08026c6ef36064b1443e4", null ],
+    [ "SetConfigJson", "classcs_1_1VideoSink.html#a8c7a97f4911756c3f0e968396d013e7a", null ],
+    [ "SetSource", "classcs_1_1VideoSink.html#a2b70769fba97197eb54e05c01ef3f1f3", null ],
+    [ "swap", "classcs_1_1VideoSink.html#a3b09ad5ebf2b5e5d2f9733ed3a24191f", null ],
+    [ "VideoEvent", "classcs_1_1VideoSink.html#ace63f20158a3037e0316962613f821f2", null ],
+    [ "VideoSource", "classcs_1_1VideoSink.html#ad165dabf73053c60bb1c4386ea0a3387", null ],
+    [ "m_handle", "classcs_1_1VideoSink.html#acfec435f0b19e839c0985475afd909a9", null ],
+    [ "m_status", "classcs_1_1VideoSink.html#aa8ac685c994e9c56738b029ca5392d38", null ]
+];

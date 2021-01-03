@@ -1,0 +1,5 @@
+var classwpi_1_1filter__iterator__impl_3_01WrappedIteratorT_00_01PredicateT_00_01std_1_1bidirectional__iterator__tag_01_4 =
+[
+    [ "filter_iterator_impl", "classwpi_1_1filter__iterator__impl_3_01WrappedIteratorT_00_01PredicateT_00_01std_1_1bidirectional__iterator__tag_01_4.html#a8a6c2dcd3ebdcca8282605c5a960baa6", null ],
+    [ "operator--", "classwpi_1_1filter__iterator__impl_3_01WrappedIteratorT_00_01PredicateT_00_01std_1_1bidirectional__iterator__tag_01_4.html#aba1e1a17ebd178cdb9ca0f431ea2eea2", null ]
+];
