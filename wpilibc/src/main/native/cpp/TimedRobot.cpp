@@ -22,15 +22,18 @@ void TimedRobot::StartCompetition() {
   RobotInit();
 
   if constexpr (IsSimulation()) {
-    SimulationInit();
+  SimulationInit();
   }
 
   // Tell the DS that the robot is ready to be enabled
-  std::puts("\n********** Robot program startup complete **********");
+    std::puts("\n********** Robot program startup complete **********");
   HAL_ObserveUserProgramStarting();
 
   // Loop forever, calling the appropriate mode-dependent function
-  while (true) {
+  while  ( true )    
+  
+  
+{
     // We don't have to check there's an element in the queue first because
     // there's always at least one (the constructor adds one). It's reenqueued
     // at the end of the loop.
