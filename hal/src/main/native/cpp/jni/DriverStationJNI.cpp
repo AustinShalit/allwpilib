@@ -5,7 +5,6 @@
 #include <jni.h>
 
 #include <cassert>
-#include <utility>
 #include <vector>
 
 #include "HALUtil.hpp"
@@ -13,6 +12,7 @@
 #include "wpi/hal/DriverStation.h"
 #include "wpi/hal/DriverStationTypes.h"
 #include "wpi/util/jni_util.hpp"
+#include "wpi/util/string.h"
 
 static_assert(
     org_wpilib_hardware_hal_DriverStationJNI_ALLIANCE_STATION_UNKNOWN ==
@@ -116,6 +116,26 @@ Java_org_wpilib_hardware_hal_DriverStationJNI_setOpModeOptions
   (JNIEnv* env, jclass, jobjectArray options)
 {
   std::vector<HAL_OpModeOption> coptions;
+  // HAL_SetOpModeOptions copies the strings and does not take ownership of the
+  // allocations from CreateOpModeOptionFromJava. Free them on every exit path,
+  // including early returns for a null element or a conversion error (id == 0
+  // from a thrown exception; WPI_FreeString is safe on empty {nullptr, 0}
+  // strings used in that error return).
+  struct FreeOpModeOptionStrings {
+    std::vector<HAL_OpModeOption>& options;
+    explicit FreeOpModeOptionStrings(std::vector<HAL_OpModeOption>& options)
+        : options{options} {}
+    FreeOpModeOptionStrings(const FreeOpModeOptionStrings&) = delete;
+    FreeOpModeOptionStrings& operator=(const FreeOpModeOptionStrings&) = delete;
+    ~FreeOpModeOptionStrings() {
+      for (auto&& option : options) {
+        WPI_FreeString(&option.name);
+        WPI_FreeString(&option.group);
+        WPI_FreeString(&option.description);
+      }
+    }
+  } freeOptions{coptions};
+
   if (options != nullptr) {
     jsize length = env->GetArrayLength(options);
     coptions.reserve(length);
@@ -126,11 +146,11 @@ Java_org_wpilib_hardware_hal_DriverStationJNI_setOpModeOptions
         return;
       }
       auto coption = CreateOpModeOptionFromJava(env, option);
+      coptions.push_back(coption);
       if (coption.id == 0) {
         // exception thrown
         return;
       }
-      coptions.emplace_back(std::move(coption));
     }
   }
   int32_t status = HAL_SetOpModeOptions(coptions.data(), coptions.size());

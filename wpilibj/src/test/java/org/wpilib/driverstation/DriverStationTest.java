@@ -6,6 +6,8 @@ package org.wpilib.driverstation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -17,6 +19,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.wpilib.driverstation.internal.DriverStationBackend;
+import org.wpilib.hardware.hal.DriverStationJNI;
+import org.wpilib.hardware.hal.OpModeOption;
 import org.wpilib.hardware.hal.RobotMode;
 import org.wpilib.hardware.hal.simulation.DriverStationDataJNI;
 import org.wpilib.simulation.AlertSim;
@@ -27,6 +31,7 @@ import org.wpilib.util.Alert;
 class DriverStationTest {
   @AfterEach
   void tearDown() {
+    RobotState.clearOpModes();
     DriverStationBackend.clearUserProgramStarted();
   }
 
@@ -237,5 +242,73 @@ class DriverStationTest {
     var field = DriverStationBackend.class.getDeclaredField("m_userProgramStarted");
     field.setAccessible(true);
     field.set(null, false);
+  }
+
+  @Test
+  void publishOpModesCopiesStringsAndSurvivesRepeatedPublish() {
+    long id =
+        RobotState.addOpMode(
+            RobotMode.TELEOPERATED,
+            "TemporaryTeleopOpMode",
+            "TemporaryGroup",
+            "TemporaryDescription");
+    assertNotEquals(0, id);
+
+    for (int i = 0; i < 50; i++) {
+      RobotState.publishOpModes();
+      OpModeOption[] options = DriverStationSim.getOpModeOptions();
+      assertEquals(1, options.length);
+      assertEquals(id, options[0].id);
+      assertEquals("TemporaryTeleopOpMode", options[0].name);
+      assertEquals("TemporaryGroup", options[0].group);
+      assertEquals("TemporaryDescription", options[0].description);
+      assertEquals(-1, options[0].textColor);
+      assertEquals(-1, options[0].backgroundColor);
+    }
+
+    // A second distinct option should also round-trip through JNI.
+    long autoId =
+        RobotState.addOpMode(
+            RobotMode.AUTONOMOUS, "TemporaryAutoOpMode", "AutoGroup", "AutoDescription");
+    assertNotEquals(0, autoId);
+    RobotState.publishOpModes();
+
+    OpModeOption[] options = DriverStationSim.getOpModeOptions();
+    assertEquals(2, options.length);
+    OpModeOption teleop = findOption(options, "TemporaryTeleopOpMode");
+    OpModeOption autonomous = findOption(options, "TemporaryAutoOpMode");
+    assertEquals(id, teleop.id);
+    assertEquals("TemporaryGroup", teleop.group);
+    assertEquals("TemporaryDescription", teleop.description);
+    assertEquals(autoId, autonomous.id);
+    assertEquals("AutoGroup", autonomous.group);
+    assertEquals("AutoDescription", autonomous.description);
+  }
+
+  @Test
+  void setOpModeOptionsRejectsNullElementWithoutChangingPublishedOptions() {
+    long id = RobotState.addOpMode(RobotMode.TELEOPERATED, "TemporaryTeleopOpMode");
+    assertNotEquals(0, id);
+    RobotState.publishOpModes();
+
+    OpModeOption valid =
+        new OpModeOption(id, "ShouldNotBePublished", "Group", "Description", -1, -1);
+    IllegalArgumentException ex =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> DriverStationJNI.setOpModeOptions(new OpModeOption[] {valid, null}));
+    assertEquals("Null OpModeOption passed in array", ex.getMessage());
+
+    OpModeOption[] options = DriverStationSim.getOpModeOptions();
+    assertEquals(1, options.length);
+    assertEquals("TemporaryTeleopOpMode", options[0].name);
+    assertEquals(id, options[0].id);
+  }
+
+  private static OpModeOption findOption(OpModeOption[] options, String name) {
+    return Arrays.stream(options)
+        .filter(option -> name.equals(option.name))
+        .findFirst()
+        .orElseThrow(() -> new AssertionError("Missing op mode: " + name));
   }
 }

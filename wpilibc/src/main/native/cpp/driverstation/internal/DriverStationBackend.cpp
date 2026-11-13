@@ -219,9 +219,20 @@ struct Instance {
   std::array<JoystickAlerts, DriverStationBackend::JOYSTICK_PORTS>
       joystickAlerts;
 
-  // Op mode lookup
+  // Op mode lookup. Strings are stored as owning std::string values so later
+  // reads (duplicate checks, removal, publish, and name lookup) do not depend
+  // on the lifetime of the caller's string arguments.
+  struct StoredOpModeOption {
+    int64_t id = 0;
+    std::string name;
+    std::string group;
+    std::string description;
+    int32_t textColor = -1;
+    int32_t backgroundColor = -1;
+  };
+
   wpi::util::mutex opModeMutex;
-  wpi::util::DenseMap<int64_t, HAL_OpModeOption> opModes;
+  wpi::util::DenseMap<int64_t, StoredOpModeOption> opModes;
   bool userProgramStarted = false;
 
   std::string OpModeToString(int64_t id) {
@@ -231,7 +242,7 @@ struct Instance {
     }
     auto it = opModes.find(id);
     if (it != opModes.end()) {
-      return std::string{wpi::util::to_string_view(&it->second.name)};
+      return it->second.name;
     }
     return std::format("<{}>", id);
   }
@@ -827,10 +838,6 @@ static int64_t DoAddOpMode(RobotMode mode, std::string_view name,
     return 0;
   }
 
-  WPI_String nameWpi = wpi::util::make_string(name);
-  WPI_String groupWpi = wpi::util::make_string(group);
-  WPI_String descriptionWpi = wpi::util::make_string(description);
-
   auto& inst = ::GetInstance();
   std::scoped_lock lock{inst.opModeMutex};
   std::string nameCopy{name};
@@ -838,14 +845,15 @@ static int64_t DoAddOpMode(RobotMode mode, std::string_view name,
     int64_t id = HAL_MakeOpModeId(static_cast<HAL_RobotMode>(mode),
                                   std::hash<std::string_view>{}(nameCopy));
     auto [it, isNew] = inst.opModes.try_emplace(
-        id, HAL_OpModeOption{id, nameWpi, groupWpi, descriptionWpi, textColor,
-                             backgroundColor});
+        id, Instance::StoredOpModeOption{
+                id, std::string{name}, std::string{group},
+                std::string{description}, textColor, backgroundColor});
     if (isNew) {
       return id;
     }
     if (HAL_OpMode_GetRobotMode(it->second.id) ==
             static_cast<HAL_RobotMode>(mode) &&
-        wpi::util::to_string_view(&it->second.name) == name) {
+        it->second.name == name) {
       return 0;  // can't insert duplicate name
     }
     // collision, try again with space appended
@@ -888,7 +896,7 @@ int64_t DriverStationBackend::RemoveOpMode(RobotMode mode,
        ++it) {
     if (HAL_OpMode_GetRobotMode(it->second.id) ==
             static_cast<HAL_RobotMode>(mode) &&
-        wpi::util::to_string_view(&it->second.name) == name) {
+        it->second.name == name) {
       int64_t id = it->second.id;
       inst.opModes.erase(it);
       return id;
@@ -903,7 +911,11 @@ void DriverStationBackend::PublishOpModes() {
   std::vector<HAL_OpModeOption> options;
   options.reserve(inst.opModes.size());
   for (auto&& [id, option] : inst.opModes) {
-    options.emplace_back(option);
+    options.push_back(
+        HAL_OpModeOption{option.id, wpi::util::make_string(option.name),
+                         wpi::util::make_string(option.group),
+                         wpi::util::make_string(option.description),
+                         option.textColor, option.backgroundColor});
   }
   HAL_SetOpModeOptions(options.data(), options.size());
 
